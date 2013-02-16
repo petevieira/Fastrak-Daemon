@@ -24,7 +24,7 @@ PROJECT := fastrak
 
 #.PHONY: default clean
 
-BINARIES := fastrakd
+BINARIES := fastrakd fastrak-test
 
 CFLAGS := -g --std=gnu99
 
@@ -36,6 +36,9 @@ OBJS := fastrakd.o fastrak.o daemonizer.o
 
 fastrakd: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS) 
+
+fastrak-test: fastrak-test.o
+	$(CC) $(CFLAGS) -o $@ fastrak-test.o $(LIBS)
 
 
 clean:
