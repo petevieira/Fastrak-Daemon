@@ -17,15 +17,18 @@ int main(int argc, char **argv )
     memset( &fastrak, 0, sizeof(fastrak) );
     size_t fs;
 
-    int sensor = 1;
-    sensor--;
+    int numOfsensors = 4;
     
     while(1)
     {
         ach_get( &chan, &fastrak, sizeof(fastrak), &fs, NULL, ACH_O_LAST );
-        printf("%f\t%f\t%f\n", fastrak.data[sensor][0], fastrak.data[sensor][1],
-            fastrak.data[sensor][2] );
-
+        for(int sensor=0; sensor<4; sensor++)
+        {
+            printf( "%d| %f\t%f\t%f\n",sensor+1, 
+            fastrak.data[sensor][0], fastrak.data[sensor][1],fastrak.data[sensor][2] );
+        }
+        printf("\n");
+        usleep(10000);
     }
 
     ach_close( &chan );
